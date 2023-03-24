@@ -17,6 +17,7 @@ body {
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
+  margin-left: 36px;
 }
 
 ul {
@@ -38,9 +39,3 @@ ul {
   margin-right: 8px;
 }
 
-.country-name-off {
-  font-weight: normal;
-  font-size: 35px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-}

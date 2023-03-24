@@ -10,30 +10,16 @@ const countryInfo = document.querySelector(".country-info");
 
 searchCountry.addEventListener("input", debounce(onSearchCountry, DEBOUNCE_DELAY));
 
-// function onSearchCountry(event) {
-//     // event.preventDefault();
-//     const name = searchCountry.value.trim();
-//     console.log(name);
-// if(!name.trim()) {
-// return
-// }
-// fetchCountries(name).then(countries => {
-//     clearInput();
-//     inputCheckup(countries);
-// })
-// .catch(() => {
-//     Notify.failure('Oops, there is no country with that name');
-//     clearInput();
-// })
-// }
 
-function onSearchCountry(){
+function onSearchCountry(event){
+    event.preventDefault();
     const name = searchCountry.value.trim();
+    console.log(name);
     if(!name.trim()){
       return}
-    fetchCountries(name).then(counrties => {
+    fetchCountries(name).then(countries => {
       clearInput();
-      inputCheckup(counrties)
+      inputCheckup(countries);
     })
     .catch(() => {
       Notify.failure("Oops, there is no country with that name");
@@ -41,62 +27,52 @@ function onSearchCountry(){
     })
     }
 
-// function renderCountriesList(countries) {
-// return countries.map(({ name: { official }, flags: { svg } }) => {
-//     return `<li class = "country-list-item">
-//     <img class = "country-list-flag" src = "${svg}" alt = "${official}" width = 30px height = 30px>
-//     <h2 class = "country-list-name">${official}</h2>
-//     </li>`
-// }).join('');
-// }
-
-function renderCountriesList(counrties){
-    return counrties.map(({name, flags}) => {
-      return `<li class='country-list_-item'>
-      <img class="country-list-flag" src="${flags.svg}" alt="${name.official}" width = 30px height = 30px>
+function renderCountriesList(countries){
+    return countries.map(({name, flags}) => {
+      return `<li class='country-list-item'>
+      <img class="country-list-flag" src="${flags.svg}" alt="${name.official}" width = 50px>
       <h2 class="country-list-name">${name.official}</h2></li>`
     }).join('');
   }
 
-// function renderCountriesInfo(countries) {
-// return countries.map(country => {
-//     const {
-//         name: { official },
-//         capital,
-//         population,
-//         flags: { svg },
-//         languages,
-//       } = country;
+function renderCountriesInfo(countries) {
+return countries.map(country => {
+    const {
+        name: { official },
+        capital,
+        population,
+        flags: { svg },
+        languages,
+      } = country;
     
-//       const langString = Object.values(languages).join(',');
+      const langString = Object.values(languages).join(', ');
 
-//    return `
-//    <div class="country-title"><img src="${svg}" alt="${official}" width=50>
-//     <p class="country-name-off">${official}</p></div>
-// <ul class = "country-info-list">
-//  <li class = "country-info-list-item"><span class="country-span">
-// Capital:</span> ${capital}
-//  </li >
-//  <li class = "country-info-list-item"><span class="country-span">
-// Population:</span> ${population}
-//  </li >
-//  <li class = "country-info-list-item"><span class="country-span">
-// Languages:</span> ${langString}
-//  </li >
-//  </ul>`   
+   return `
 
-// }).join('');
-// }
+<ul class = "country-info-list">
+ <li class = "country-info-list-item"><span class="country-span">
+Capital:</span> ${capital}
+ </li >
+ <li class = "country-info-list-item"><span class="country-span">
+Population:</span> ${population}
+ </li >
+ <li class = "country-info-list-item"><span class="country-span">
+Languages:</span> ${langString}
+ </li >
+ </ul>`   
 
-function renderCountriesInfo(counrties){
-    return counrties.map(({capital, population, languages})=>{
-  return `<ul class='country-list-info'>
-  <li class='country-list-info-item'>Capital: ${capital}</li>
-  <li class='country-list-info-item'>Population: ${population}</li>
-  <li class='country-list-info-item'>Languages: ${Object.values(languages).join(', ')}</li>
-  </ul>`
-    }).join('');
-  }
+}).join('');
+}
+
+// function renderCountriesInfo(countries){
+//     return countries.map(({capital, population, languages})=>{
+//   return `<ul class='country-list-info'>
+//   <li class='country-list-info-item'><span class="country-span">Capital:</span> ${capital}</li>
+//   <li class='country-list-info-item'><span class="country-span">Population:</span> ${population}</li>
+//   <li class='country-list-info-item'><span class="country-span">Languages:</span> ${Object.values(languages).join(', ')}</li>
+//   </ul>`
+//     }).join('');
+//   }
 
 function inputCheckup(countries) {
     if (countries.length === 1) {

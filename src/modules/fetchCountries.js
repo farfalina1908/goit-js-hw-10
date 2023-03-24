@@ -5,8 +5,9 @@ export function fetchCountries(name) {
     if(!response.ok) {
         throw new Error(response.status === 404);
     }
-    console.log(response.json());
+    // console.log(response.json());
     return response.json();
     
    });
 }
+
