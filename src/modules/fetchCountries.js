@@ -8,5 +8,5 @@ export function fetchCountries(name) {
     console.log(response.json());
     return response.json();
     
-   })
+   });
 }
